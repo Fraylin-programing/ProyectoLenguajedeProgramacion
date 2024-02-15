@@ -1,0 +1,58 @@
+﻿@page "/SumandoN"
+
+<div >
+
+    <div class="alert alert-primary" role="alert">
+        <h3 class="text-center">Sumando</h3>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2">Digite un Numero<input type="number" @bind="num1"/></div>
+            <div class="col-sm-2">Digite un Numero<input type="number" @bind="num2"/></div>
+            
+        </div>
+        <button @onclick="agregar_resultado" class="btn btn-primary">Add</button>
+    </div>
+
+    <hr style="height: 10px"/>
+
+    <ol class="list-group">
+        @foreach (double todoItem in todoList)
+        {
+            <li class="list-group-item"> El Resultado de la suma es:
+                @todoItem
+                <button @onclick="(()=> eliminarTodoItem(todoItem))" class="btn btn-danger btn-sm float-end">
+                    <span class="oi oi-circle-x"></span>
+                </button>
+            </li>
+        }
+    </ol>
+
+</div>
+
+
+@code {
+    List<double> todoList = new List<double> { 3, 4 };
+    double num1;
+    double num2;
+    void agregar_resultado()
+    {
+        num1 += num2;
+        if(num1 > 0)
+        {
+            todoList.Add(num1);
+        }
+
+
+        num1 = 0;
+        num2 = 0;
+
+    }
+
+    void eliminarTodoItem(double todoItemDelete)
+    {
+        todoList.Remove(todoItemDelete);
+    }
+}
